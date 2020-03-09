@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/handlers"
+	"crudmongomux2/api/upload_api"
 
 	"crudmongomux2/api/productapi"
 
@@ -18,6 +19,9 @@ func main() {
 	r.HandleFunc("/api/cooking/create", productapi.Create).Methods("POST")
 	r.HandleFunc("/api/cooking/update", productapi.Update).Methods("PUT")
 	r.HandleFunc("/api/cooking/{id}", productapi.Delete).Methods("DELETE")
+
+	r.HandleFunc("/api/upload", upload_api.UploadFile).Methods("POST")
+
 	err := http.ListenAndServe(":3000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(r))
 
 	if err != nil {
