@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/handlers"
 	"crudmongomux2/api/upload_api"
+
+	"github.com/gorilla/handlers"
 
 	"crudmongomux2/api/productapi"
 
@@ -22,7 +23,10 @@ func main() {
 
 	r.HandleFunc("/api/upload", upload_api.UploadFile).Methods("POST")
 
-	err := http.ListenAndServe(":3000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(r))
+	//testing rest api
+	r.HandleFunc("/api/status/find/{id}", productapi.Getdata).Methods("GET")
+
+	err := http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}), handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"}), handlers.AllowedOrigins([]string{"*"}))(r))
 
 	if err != nil {
 		fmt.Println(err)

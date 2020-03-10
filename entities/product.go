@@ -4,35 +4,35 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 type Product struct{
-	Id  				bson.ObjectId 			`json:"id" bson:"_id"`
-	Recipe 	 			string 					`bson:"recipe_name" bson:"recipe_name"`
-	Cooking  			string 					`bson:"cooking_instruction" bson:"cooking_instruction"`
+	Id  				bson.ObjectId 			`json:"id"`
+	Recipe 	 			string 					`json:"recipe_name"`
+	Cooking  			string 					`json:"cooking_instruction"`
 	
-	Chef 	 			[]ChefData 				`bson:"chef_detail" bson:"chef_detail"`
-	Rating  			[]RatingData   			`bson:"recipe_rating" bson:"recipe_rating"`
-	Images  			[]ImagesDate 		    `bson:"images" bson:"images"`
-	Ingredients  		[]IngredData 			`bson:"ingredients" bson:"ingredients"`
+	Chef 	 			[]ChefData 				`json:"chef_detail"`
+	Rating  			[]RatingData   			`json:"recipe_rating"`
+	Images  			[]ImagesDate 		    `json:"images"`
+	Ingredients  		[]IngredData 			`json:"ingredients"`
 }
 
 type ChefData struct{
-	Url  				string 					`json:url`
-	File_Name 	 		string 					`json:file_name`
-	Chef_Name 	 		string 					`json:chef_name`
+	Url  				string 					`bson:"url" bson:"url"`
+	File_Name 	 		string 					`bson:"file_name" bson:"file_name"`
+	Chef_Name 	 		string 					`bson:"chef_name" bson:"chef_name"`
 }
 type RatingData struct{	
-	Rating				string 					`json:rating`
-	Rating_Date     	string 					`json:rating_date`
-	Rating_Time			string 					`json:rating_time`
-	Id_User				string 					`json:id_user`
+	Rating				string 					`bson:"rating" bson:"rating"`
+	Rating_Date     	string 					`bson:"rating_date" bson:"rating_date"`
+	Rating_Time			string 					`bson:"rating_time" bson:"rating_time"`
+	Id_User				string 					`bson:"id_user" bson:"id_user"`
 }	
 type ImagesDate struct{
-	Url					string 					`json:url`
-	File_Name     		string 					`json:file_name`
+	Url					string 					`bson:"url" bson:"url"`
+	File_Name     		string 					`bson:"file_name" bson:"file_name"`
 }
 
 type IngredData struct{
-	Id_Ingred			string 				`json:id_ingredients`
-	Ingred_Name     	string 				`json:ingredients_name`
-	Quantity			string 				`json:quantity`
-	Unit       			string 				`json:unit`
+	Id_Ingred			string 					`bson:"id_ingredients" bson:"id_ingredients"`
+	Ingred_Name     	string 					`bson:"ingredients_name" bson:"ingredients_name"`
+	Quantity			string 					`bson:"quantity" bson:"quantity"`
+	Unit       			string 					`bson:"unit" bson:"unit"`
 }

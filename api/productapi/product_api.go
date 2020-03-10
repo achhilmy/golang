@@ -5,11 +5,34 @@ import (
 	"crudmongomux2/entities"
 	"crudmongomux2/models"
 	"encoding/json"
+	
 	"net/http"
 
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
 )
+func Getdata(response http.ResponseWriter, request *http.Request) {
+	db, err := config.Connect()
+
+	if err != nil {
+		respondWithError(response, http.StatusBadRequest, err.Error())
+		return
+	} else {
+		codeStatusModel := models.CodeStatusModel{
+			Db: db,
+		}
+		vars := mux.Vars(request)
+		id := vars["id"]
+		codestatus, err5 := codeStatusModel.Getdata(id)
+		if err5 != nil {
+			respondWithError(response, http.StatusBadRequest, err5.Error())
+			return
+		} else {
+			respondWithJson(response, http.StatusOK, codestatus)
+		}
+
+	}
+}
 
 func FindAll(response http.ResponseWriter, request *http.Request) {
 	db, err := config.Connect()
@@ -26,7 +49,7 @@ func FindAll(response http.ResponseWriter, request *http.Request) {
 			respondWithError(response, http.StatusBadRequest, err2.Error())
 			return
 		} else {
-			respondWithJson(response, http.StatusOK, products )
+			respondWithJson(response, http.StatusOK, products)
 		}
 
 	}
